@@ -1,0 +1,125 @@
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #1a120b;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #e7f6f2;
+  border-radius: 10px;
+  padding: 10px;
+  color: #e7f6f2;
+  font-size: 1.125rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  button:hover {
+    background: #e7f6f2;
+    opacity: 0.4;
+    color: #1a120b;
+    transform: scale(1.05);
+  }
+}
+button:active {
+  transform: scale(0.95);
+  background: #e7f6f2;
+  opacity: 0.4;
+  color: #1a120b;
+}
+
+.Overlay {
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MovieGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  color: #e7f6f2;
+}
+.MovieGroup-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.MovieInfo {
+  width: 100%;
+  max-width: 900px;
+  color: #e7f6f2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.MovieInfo-closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.875rem;
+  padding: 0 10px;
+}
+.MovieInfo > img {
+  width: 200px;
+  border-radius: 10px;
+}
+.MovieInfo-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  gap: 20px;
+}
+.MovieInfo-info h2 {
+  max-width: 90%;
+}
+.MovieInfo-info h2 span {
+  color: gray;
+}
+.MovieInfo-infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.MovieInfo-infoItem-ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .MovieInfo {
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+  }
+}
+
+/*# sourceMappingURL=shared.css.map */

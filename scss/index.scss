@@ -1,0 +1,251 @@
+@import "./helpers/constants";
+@import "./helpers/utilities";
+
+// Logica necessaria per la modifica del background degli pseudo-elementi ::before
+:root {
+  --heroBackgroundUrl: "";
+  --modalBackgroundUrl: "";
+}
+
+.Header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $spacing;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translate3d(0, 0, 0);
+  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  svg {
+    width: 60px;
+  }
+
+  span {
+    font-size: rem(22px);
+    color: $color-azure;
+    font-weight: 600;
+  }
+}
+
+.GenreTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing--xs;
+
+  span {
+    background-color: $color-yellow--dark;
+    color: $color-azure;
+    padding: $spacing--xs $spacing--sm;
+    border-radius: $border-radius;
+  }
+}
+
+.Hero {
+  width: 100vw;
+  min-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @include beforeWithBackground(var(--heroBackgroundUrl));
+
+  h1 {
+    z-index: 2;
+    color: $color-azure;
+    text-align: center;
+    margin: 0;
+    padding: $spacing;
+  }
+
+  &-navigator {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    padding: $spacing;
+    gap: $spacing;
+    justify-content: space-between;
+
+    &Btn {
+      display: none;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing;
+    padding: $spacing;
+
+    button {
+      display: block;
+    }
+
+    &Indicators {
+      display: flex;
+      gap: $spacing--xs;
+
+      &-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: $border-radius--sm;
+        background-color: $color-azure;
+        opacity: 0.4;
+        transition: all 0.3s;
+
+        &--active {
+          opacity: 1;
+          width: $spacing;
+          margin: 0 $spacing--xs;
+        }
+      }
+    }
+  }
+}
+
+.MovieModal {
+  border: 1px solid $color-azure;
+  padding: $spacing;
+  border-radius: $border-radius;
+  position: fixed;
+  width: calc(100% - ($spacing * 2));
+  max-width: 700px;
+  max-height: calc(100svh - ($spacing * 2));
+  overflow-y: scroll;
+  color: $color-azure;
+
+  @include beforeWithBackground(var(--modalBackgroundUrl));
+
+  &::before {
+    border-radius: $border-radius;
+  }
+}
+
+.Rater {
+  position: relative;
+  border-radius: $border-radius;
+  overflow: hidden;
+  display: grid;
+  place-content: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: $color-blue;
+
+  &-fillAmount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $color-yellow--light;
+  }
+
+  &-visualLayer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+  }
+}
+
+.MoviesByGenre {
+  &-selection {
+    display: flex;
+    gap: $spacing--sm;
+    align-items: center;
+    flex-wrap: wrap;
+
+    select {
+      box-sizing: content-box;
+      padding: $spacing--xs;
+      border-radius: $border-radius;
+      border: none;
+      font-size: rem(22px);
+      background-color: $color-blue;
+      color: $color-azure;
+    }
+  }
+}
+
+.MovieCard {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+  align-items: center;
+  scroll-snap-align: start;
+  min-width: calc(100vw - ($spacing * 2));
+  background-color: $color-azure;
+  border-radius: $border-radius;
+  text-align: center;
+  padding: $spacing;
+  cursor: pointer;
+  background-color: $color-blue;
+  color: $color-azure;
+
+  .GenreTags {
+    font-size: rem(12px);
+    justify-content: center;
+  }
+
+  &-poster {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    transition: all 0.4s;
+    margin-bottom: auto;
+    border-radius: $border-radius;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: $border-radius;
+      transition: all 1s;
+    }
+  }
+
+  &:hover {
+    .MovieCard-poster {
+      scale: 1.015;
+      box-shadow: none;
+
+      > img:first-child {
+        filter: blur(12px);
+      }
+    }
+  }
+}
+
+@include tablet {
+  .Hero {
+    &-navigatorBtn {
+      display: block;
+    }
+
+    &-footer {
+      button {
+        display: none;
+      }
+    }
+  }
+
+  .MovieCard {
+    min-width: 300px;
+  }
+
+  .MoviesByGenre-list {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .MovieCard {
+      width: 300px;
+    }
+  }
+}

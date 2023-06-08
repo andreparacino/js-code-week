@@ -1,0 +1,135 @@
+@import "./helpers/constants";
+@import "./helpers/utilities";
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: $color-black;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing--lg;
+}
+
+button {
+  background: transparent;
+  border: 1px solid $color-azure;
+  border-radius: $border-radius;
+  padding: $spacing--sm;
+  color: $color-azure;
+  font-size: rem(18px);
+  transition: all 0.3s;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background: $color-azure;
+      opacity: 0.4;
+      color: $color-black;
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+    background: $color-azure;
+    opacity: 0.4;
+    color: $color-black;
+  }
+}
+
+.Overlay {
+  position: fixed;
+  padding: $spacing;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MovieGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+  padding: $spacing;
+  color: $color-azure;
+
+  &-list {
+    display: flex;
+    gap: $spacing;
+    overflow-x: scroll;
+    padding-bottom: $spacing;
+    scroll-snap-type: x mandatory;
+  }
+}
+
+.MovieInfo {
+  width: 100%;
+  max-width: 900px;
+  color: $color-azure;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing;
+  align-items: center;
+
+  &-closeBtn {
+    position: absolute;
+    top: $spacing;
+    right: $spacing;
+    font-size: rem(30px);
+    padding: 0 $spacing--sm;
+  }
+
+  > img {
+    width: 200px;
+    border-radius: $border-radius;
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    gap: $spacing;
+
+    h2 {
+      max-width: 90%;
+      span {
+        color: gray;
+      }
+    }
+
+    &Item {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing--xs;
+
+      &-ratingContainer {
+        display: flex;
+        align-items: center;
+        gap: $spacing--xs;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .MovieInfo {
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative;
+  }
+}
